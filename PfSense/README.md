@@ -11,3 +11,38 @@ ENA (Elastic Network Adapter) is a high performance virtual Ethernet interface o
 It's easy, you only need to fetch it from the here and place under your kernel modules then just load it manually and ensure it's enabled at boot. let see in details.
 
 Download the code on the PfSense box
+
+<img src="https://github.com/pazarr/aws-misc/blob/main/img/pfsense-login.png" alt="SSH into your PfSense" border="10" />
+
+Fetch the latest kernel module from here 
+
+```bash
+$ curl https://github.com/pazarr/aws-misc/blob/main/PfSense/if_ena.ko --output /boot/kernel/if_ena.ko
+$ cp /boot/kernel/if_ena.ko /boot/modules/
+```
+
+Ensure it has the right ownership and access bits
+
+```
+$ chown root:wheel /boot/kernel/if_ena.ko /boot/modules/if_ena.ko
+$ chmod 0555 https://github.com/pazarr/aws-misc/blob/main/PfSense/if_ena.ko
+```
+
+Try to load the module
+
+```bash
+$ kldload /boot/kernel/if_ena.ko
+$ kldstat
+Id Refs Address            Size     Name
+ 1    7 0xffffffff80200000 37191d8  kernel
+ 2    1 0xffffffff8391a000 28290    if_ena.ko
+ 3    1 0xffffffff83a19000 10c0     cpuctl.ko
+ ```
+ If everything goes well, you suppose to see the module loaded.
+ 
+ To load this kernel module during boot, we need to do following changes
+ ```
+ $ echo 'if_ena_load="YES"' > /boot/loader.conf
+ $ sync
+ ```
+It's ready to reboot it.
