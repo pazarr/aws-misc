@@ -33,6 +33,7 @@ $ curl https://raw.githubusercontent.com/pazarr/aws-misc/main/PfSense/if_ena.ko 
 $ cp /boot/kernel/if_ena.ko /boot/modules/
 ```
 For MD5 verification 5241169661c82ac8f8660c4083bfb473
+
 Ensure it has the right ownership and access bits
 
 ```
@@ -54,7 +55,7 @@ Id Refs Address            Size     Name
  
  To load this kernel module during boot, we need to do following changes
  ```
- $ echo 'if_ena_load="YES"' > /boot/loader.conf
+ $ echo 'if_ena_load="YES"' >> /boot/loader.conf
  $ sync
  ```
 It's ready to reboot it.
