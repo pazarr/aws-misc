@@ -17,15 +17,15 @@ Download the code on the PfSense box
 Fetch the latest kernel module from here 
 
 ```bash
-$ curl https://github.com/pazarr/aws-misc/blob/main/PfSense/if_ena.ko --output /boot/kernel/if_ena.ko
+$ curl https://raw.githubusercontent.com/pazarr/aws-misc/main/PfSense/if_ena.ko --output /boot/kernel/if_ena.ko
 $ cp /boot/kernel/if_ena.ko /boot/modules/
 ```
-
+For MD5 verification 5241169661c82ac8f8660c4083bfb473
 Ensure it has the right ownership and access bits
 
 ```
 $ chown root:wheel /boot/kernel/if_ena.ko /boot/modules/if_ena.ko
-$ chmod 0555 https://github.com/pazarr/aws-misc/blob/main/PfSense/if_ena.ko
+$ chmod 0555 /boot/kernel/if_ena.ko /boot/modules/if_ena.ko
 ```
 
 Try to load the module
